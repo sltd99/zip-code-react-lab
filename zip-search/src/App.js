@@ -34,7 +34,7 @@ const handleZipSearch = async (e, setCities) => {
 
     const zipCode = e.target.elements["zip-code"].value
 
-    if (!zipCode) return
+    if (!zipCode || zipCode.length < 5) return
 
     try {
         const response = await fetch(
@@ -42,8 +42,6 @@ const handleZipSearch = async (e, setCities) => {
         )
 
         const rawCityData = await response.json()
-
-        console.log(rawCityData)
 
         const cities = rawCityData.map(cityData => ({
             city: cityData.City,
